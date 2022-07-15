@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Http\Request;
-
-
 use Illuminate\Support\Facades\Route;
+use App\Models\Lists;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -27,11 +27,11 @@ use Illuminate\Support\Facades\Route;
 also remember that php must be present globaly un your local machine
 */
 
-// routes
+// home routes
 Route::get('/', function () {
     return view('listings', [
         'heading' => "latest listings",
-        "listings" => [
+        "listings" =>[
             [
                 "id" => 1,
                 "title" => "listing 1",
@@ -42,10 +42,16 @@ Route::get('/', function () {
                 "title" => "listing 2",
                 "description" => "lorem ipsum dolor sit amet 2",
             ]
-        ]
+            ]
     ]);
 });
 
+// find single list route
+Route::get("/single-list/{id}",function($id){
+    return view("listing",[
+        'listing'=>Lists::find($id)
+    ]);
+});
 
 
 
